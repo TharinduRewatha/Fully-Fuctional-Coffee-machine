@@ -1,0 +1,134 @@
+#include <iostream>
+#include <string>
+#include <iomanip>//setprecision
+#include <vector>
+
+using namespace std;
+
+struct coffee {
+  string name;
+  int itemprice;
+  string country;
+  int quantity;
+
+};
+
+
+
+    vector <coffee> coffee_drink ={
+
+   { "Espresso", 120, "Italy", 20 },
+   {"Iced coffee", 150, "France", 20},
+   {"Long black", 80, "Austral", 20},
+   {"Americano", 100, "America", 20},
+   {"Latte", 200, "Italy", 20},
+   {"Irishcoffee", 130, "Ireland", 20},
+   {"Cappuccino", 180, "Italy", 20}
+
+   };
+
+void addcoffee();
+void showCoffee();
+void selectOperator();
+void add_coffeePowder();
+void switch_betweenOperator();
+float remainder, price2, price;
+
+int main() {
+      int coffeetype = 1; 
+
+        selectOperator();
+
+
+        
+}
+
+void addcoffee(){
+
+         coffee enter_coffee;
+         cout << "Enter the detailsof new coffee here!" << endl
+              << "Enter the name of new coffee type"<<endl;
+         cin >> enter_coffee.name;
+         cout << "Enter the price of new coffee type"<<endl;
+         cin >> enter_coffee.itemprice;
+         cout << "Enter the country of origin" << endl;
+         cin >> enter_coffee.country;
+         cout << "Enter the quantity" << endl;
+         cin >> enter_coffee.quantity;
+
+         coffee_drink.push_back(enter_coffee);
+}
+
+void showCoffee(){
+
+        cout << fixed;
+       // cout << setprecision(2);  
+        
+for (int i = 0; i != coffee_drink.size(); ++i){
+        cout<< "\n " << i+1 << ") "<<coffee_drink[i].name<<"\t\t"<<coffee_drink[i].itemprice<<setprecision(2)<<"\t\t"<<coffee_drink[i].country<<"\t\t("<<coffee_drink[i].quantity<<") remaining";}
+
+}
+
+void selectOperator(){
+          int type=1;
+      cout<<"Enter no.1 for add new coffee type ||no.2 for add coffee powder"<<endl;
+      cin>>type;
+      if(type==1){
+            addcoffee();
+            char yes=1;
+            cout<<"Do you want add more.Press y or n"<<endl;
+            cin>>yes;
+            if (yes=='y'){
+                addcoffee();
+                showCoffee();
+            }
+            else{
+                showCoffee();
+            }
+      }
+      else{
+        add_coffeePowder();
+      }
+}
+
+void add_coffeePowder(){
+
+  int addpowder = 1;
+  int quantity = 1;
+  string addMinus;
+
+  showCoffee();
+  cout << endl;
+
+  cout << "For which coffee type you want to add or remove coffee powder"<<endl;
+
+  cin >> addpowder;
+
+  cout << "Type 'Add' for add coffee powder || Type 'Remove' for remove coffee powder"<<endl;
+  cin >> addMinus;
+  cout << "How many coffee cups you want to "<<addMinus<<" for " << coffee_drink[addpowder - 1].name << endl;
+  cin >> quantity;
+
+  if (addMinus=="Add"){
+  coffee_drink[addpowder-1].quantity += quantity; //this will add 10 more cups of coffee
+  switch_betweenOperator();
+   showCoffee();
+  }
+  else{
+  coffee_drink[addpowder-1].quantity -= quantity; //this will add 10 more cups of coffee
+  switch_betweenOperator();
+  showCoffee();
+  }
+}
+
+void switch_betweenOperator(){
+  int leave = 1;
+  cout << "Press 1 for modify more.Press 2 for leave operator mode" << endl;
+  cin >> leave;
+  if (leave ==1){
+    add_coffeePowder();
+  }
+  else{
+    //usermode
+  }
+}
